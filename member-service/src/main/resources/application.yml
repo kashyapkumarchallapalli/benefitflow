@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: member-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/benefitflow
+    username: benefitflow
+    password: benefitflow
+  jpa:
+    hibernate:
+      ddl-auto: update        # dev only, replaced by Flyway migrations later
+      open-in-view: false
+      show-sql: true
+
+server:
+  port: 8081
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
