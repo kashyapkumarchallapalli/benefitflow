@@ -11,10 +11,19 @@ import java.util.Objects;
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "members")
 public class Member {
+
+    public static Member create(String memberId, String fullName, String email, LocalDate dateOfBirth) {
+        Member m = new Member();
+        m.memberId = memberId;          // direct field access inside the class; no public setter exists
+        m.fullName = fullName;
+        m.email = email;
+        m.dateOfBirth = dateOfBirth;
+        m.status = MemberStatus.ACTIVE; // business rule lives in the domain
+        return m;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
