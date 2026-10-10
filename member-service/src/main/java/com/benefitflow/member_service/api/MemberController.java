@@ -1,6 +1,7 @@
 package com.benefitflow.member_service.api;
 
 import com.benefitflow.member_service.service.MemberService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +18,7 @@ public class MemberController {
     }
 
     @PostMapping("/members")
-    public ResponseEntity<MemberResponse> createMember(@RequestBody CreateMemberRequest request) {
+    public ResponseEntity<MemberResponse> createMember(@Valid  @RequestBody CreateMemberRequest request) {
         return ResponseEntity.created(URI.create("/api/members/" + request.memberId())).body(memberService.create(request));
     }
 
