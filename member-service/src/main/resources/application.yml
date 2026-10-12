@@ -7,7 +7,7 @@ spring:
     password: benefitflow
   jpa:
     hibernate:
-      ddl-auto: update        # dev only, replaced by Flyway migrations later
+      ddl-auto: validate        # dev only, replaced by Flyway migrations later
       open-in-view: false
       show-sql: true
 
