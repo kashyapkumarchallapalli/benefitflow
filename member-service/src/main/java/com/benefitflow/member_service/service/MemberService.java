@@ -40,8 +40,18 @@ public class MemberService {
             Member saved = memberRepository.saveAndFlush(
                     Member.create(req.memberId(), req.fullName(), req.email(), req.dateOfBirth()));
             return getMemberDetails(saved);
-        } catch (DataIntegrityViolationException e) {                       // the race: DB constraint is the real guard
-            throw new DuplicateMemberException(req.memberId());
+        } catch (DataIntegrityViolationException e) {
+            //get the exception message to determine if it was a duplicate memberId or email
+            String message = e.getMostSpecificCause().getMessage();
+            if (message.contains("uq_members_member_id")) {
+                throw new DuplicateMemberException(req.memberId());
+            } else if (message.contains("uq_members_email")) {
+                throw new DuplicateEmailException(req.email());
+            }
+            else{
+                throw e;
+            }
+            // the race: DB constraint is the real guard
         }
     }
 
