@@ -62,7 +62,7 @@ public class MemberService {
                 member.getEmail(),
                 member.getDateOfBirth().toString(),
                 member.getStatus().name(),
-                member.getCreatedAt().toString()
+                member.getCreatedAt()
         );
     }
 }
